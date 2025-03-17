@@ -16,5 +16,5 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	log.Print("Handler Started")
 	defer log.Print("Handler Ended")
 	time.Sleep(5 * time.Second)
-	fmt.Println(w, "Hello")
+	fmt.Fprintln(w, "Hello")
 }

@@ -30,19 +30,18 @@ L:
 			fmt.Println(ctx.Err())
 			break L
 		default:
-			fmt.Println("Hold on...")
+			time.Sleep(2*time.Second)
+			fmt.Println("quit: ")
 		}
 	}
-
 }
 
 func after(d time.Duration) chan bool {
 	c := make(chan bool)
 	go func() {
 		time.Sleep(d)
-		fmt.Println("sending out now")
 		c <- true
-		fmt.Println("sent")
 	}()
 	return c
 }
+
