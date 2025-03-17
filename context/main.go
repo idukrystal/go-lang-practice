@@ -19,10 +19,11 @@ func main() {
 }
 
 func sleepAndTalk(ctx context.Context, d time.Duration, msg string) {
+	a := after(d)
 L:
 	for {
 		select {
-		case <-after(d):
+		case <-a:
 			fmt.Println(msg)
 			break L
 		case <-ctx.Done():
