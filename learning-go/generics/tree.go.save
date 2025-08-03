@@ -1,0 +1,56 @@
+package main
+
+import(
+//	"fmt"
+)
+
+type Treeable[T any] interface {
+	Compare(other T) int
+}
+type TreeNode[T any] struct {
+	Val  Treeable[T]
+	Left *TreeNode[T]
+	Right *TreeNode[T]
+}
+
+
+func (tn *TreeNode[T]) Add(val Treeable[T]) *TreeNode[T] {
+	if tn == nil {
+		return &TreeNode[T]{Val:val}
+	}
+	switch tn.Val.Compare(v) {
+	case 1:
+		tn.Right = tn.Right.Add(val.(T))
+	case -1:
+		tn.Left = tn.Left.Add(val.(T))
+	}
+	return tn
+}
+
+func NewTree[T any](vals... T) *TreeNode[T] {
+	var tree *TreeNode[T]
+
+	for _, val := range vals {
+		tree.Add(val)
+	}
+
+	return tree
+}
+
+type TreeInt int
+func (t TreeInt) Compare(other TreeInt) int {
+	switch {
+	case t > other:
+		return 1
+	case t < other:
+		return -1
+	default:
+		return 0
+	}
+}
+
+func main() {
+	var x = TreeInt(5)
+	tree := NewTree[TreeInt](x)
+	print(tree)
+}
